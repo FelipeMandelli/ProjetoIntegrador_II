@@ -3,7 +3,9 @@
 //  Codigo utilizado para testar o funcionamento do modulo  //
 //  ESP8266 01 Por meio do monitor serial do Arduino IDE    //
 //  e comandos AT. Este codigo generico foi encontrado na   //
-//  internet e nao foi produzido pelo grupo                 //
+//  internet e nao foi produzido pelo grupo. Encontrado no  //
+//  site Robocore, por  Giovanni de Castro em:              //
+//  robocore.net/tutoriais/conectando-esp8266-no-arduino    //
 //----------------------------------------------------------//
 //----------------------------------------------------------//
 
