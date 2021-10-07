@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Natalia Campos</h5>
+                    <h5 class="card-title">Natalia Pereira</h5>
                     <p class="card-text">Ela literalmente tem tudo que você precisar sobre a aula, e temos a representante da sala com a gente, kkkkkk</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
