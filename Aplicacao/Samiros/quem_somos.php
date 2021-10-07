@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Felipe Mandeli</h5>
+                    <h5 class="card-title">Felipe Mandelli</h5>
                     <p class="card-text">O piloto da equipe, não capota o carro por conta da faculdade de fisica</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
@@ -109,7 +109,7 @@
                 <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">Samir Ferreira</h5>
-                    <p class="card-text">O sumido da escola que não sabe oque esta acontecendo mas tenta fazer as lições</p>
+                    <p class="card-text">O sumido da escola que não sabe o que esta acontecendo mas tenta fazer as lições</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
                 </div>
