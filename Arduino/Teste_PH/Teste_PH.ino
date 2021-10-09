@@ -1,11 +1,15 @@
-/*
- * Modificado por Projeto Básico
- * www.youtube.com/c/projetobasicos
- * www.rpsilva100.blogspot.com
- * codigo original disponivél em
- * https://forum.arduino.cc/index.php?topic=336012.0
- *
- */
+//----------------------------------------------------------//
+//----------------------------------------------------------//
+//  Codigo utilizado para testar o funcionamento do modulo  //
+//  de pH modelo Ph4502c por meio do monitor serial do      //
+//  Arduino IDE. Este codigo generico foi encontrado na     //
+//  internet e nao foi produzido pelo grupo. Encontrado no  //
+//  canal Projeto Basico, em: youtube.com/c/projetobasicos  //
+//  e foi modificado a partir do codigo inicial disponivel  //
+//  em: forum.arduino.cc/index.php?topic=336012.0           //
+//----------------------------------------------------------//
+//----------------------------------------------------------//
+
 
 int ph_pin = A0; //This is the pin number connected to Po
 
