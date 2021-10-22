@@ -11,3 +11,6 @@ A parte fisica do projeto consiste de uma placa Arduino Uno, como microcontrolad
 - Sensor de Temperatura a prova dagua;
 
 Foram conduzidos inicialmente testes individuais nas pecas, para atestar funcionamento e a fim de estudar a implementacao e uso destas. 
+
+
+Aliado tambem ao Microcontrolador, o projeto da boia foi desenvolvido inicialmente pelo Grupo, com auxilio do Software de modelagem SolidWorks, esta modelagem inicial se encontra na pasta Boia, arquivo Esboco Inicial. O intuito deste esboco era criar uma imagem do projeto, bem como um norte para definir a modelagem final da boia juntamente com os tecnicos do Senac para impressao 3D.
