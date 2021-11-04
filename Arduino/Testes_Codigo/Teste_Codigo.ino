@@ -193,9 +193,44 @@ int gpsBaud = 9600;
     }
   }
   
-  //Obter GPS por Referencia (Ponteiros)
-  int LerValorGPS(int ValorGPS, bool statusGPS){
-   
+  //Obter Posicao do GPS por Referencia (Ponteiros)
+  void LerPosicaoGPS(long *pLat, long *pLongi, int *pAlt, bool *pStaPosGPS){
+   if (gps.location.isValid()){
+     *pLat = gps.location.lat();
+     *pLongi = gps.location.lng();
+     *pAlt = gps.altitude.meters();
+     *pStaPosGPS = true;
+   }
+   else {
+     *pStaPosGPS = false;
+   }
+  }
+
+  //Obter Data do GPS por Referencia (Ponteiros)
+  void LerDataGPS (int *pA, int *pM, int *pD, bool *pStaDataGPS){
+    if (gps.date.isValid()){
+      *pA = gps.date.year();
+      *pM = gps.date.month();
+      *pD = gps.date.day();
+      *pStaDataGPS = true
+    }
+    else {
+      *pStaDataGPS = false;
+    }
+  }
+
+  //Obter Hora do GPS por Referencia (Ponteiros)
+  void LerHoraGPS (int *pHr, int *pMin, int *pSeg, bool *pStaHoraGPS){
+    if (gps.time.isValid()){
+      *pHr = gps.time.hour();
+      *pMin = gps.time.minute();
+      *pSeg = gps.time.second();
+      *pStaHoraGPS = true;
+    }
+    else {
+      *pStaHoraGPS = false;
+    }
+    
   }
 
 
@@ -230,8 +265,15 @@ void loop() {
   float valorSensorPh;
   float valorSensorTemperatura;
   int valorSensorTurbidez;
-  int informacoesGps;
-   
+  
+  //Infos do GPS
+  long Latitude, Longitude, Altitude;
+  int Ano, Mes, Dia;
+  int Hora, Minuto, Segundo;
+  bool statusPosGPS = false;
+  bool statusDataGPS = false;
+  bool statusHoraGPS = false;
+
 
   //Obter o Valor da Temperatura 
   if(statusTemperatura != true){
@@ -293,11 +335,50 @@ void loop() {
     Serial.println();
   }
 
-//
-//  if(statusGPS != true){
-//    //Chama a funcao LerValorGPS                   
-//    LerValorTurbidez(valorSensorTurbidez, informacoesGps);
-//  }
+
+  if(statusGPS != true){
+    //Chama a funcao LerPosicaoGPS                   
+    LerPosicaoGPS(&Latitude, &Longitude, &Altitude, &statusPosGPS);
+    //Chama a funcao LerDataGPS
+    LerDataGPS(&Ano, &Mes, &Dia, &statusDataGPS);
+    //Chama a funcao LerHoraGPS
+    LerHoraGPS(&Hora, &Minuto, &Segundo, &statusHoraGPS);
+
+    //Escreve, se houver, o Valor no monitor serial
+    if (statusPosGPS == true){
+      serial.print("Latitude: ");
+      serial.println(Latitude);
+      serial.print("Longitude: ");
+      serial.println(Longitude);
+      serial.print("Altitude: ");
+      serial.println(Altitude);
+      statusGPS = true;
+    }
+
+    if (statusHoraGPS == true){
+      serial.print("Hora: ");
+      serial.print(Hora);
+      serial.print(":");
+      serial.print(Minuto);
+      serial.print(":");
+      serial.println(Segundo);
+      statusGPS = true;
+    }
+
+    if (statusDataGPS == true){
+      serial.print("Data: ");
+      serial.print(Dia);
+      serial.print("/");
+      serial.print(Mes);
+      serial.print("/");
+      serial.println(Ano);
+      statusGPS = true;
+    }
+
+    if (statusGPS != true){
+      serial.println("GPS sem valores!");
+    }
+  }
 
   delay(1000);
 
