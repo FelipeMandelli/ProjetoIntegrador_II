@@ -29,7 +29,7 @@ const int pino_Turb = A1;
 //Declarando Objetos 
 
 //Objetos Sensor Temperatura
-neWire oneWire(ONE_WIRE_BUS);        
+OneWire oneWire(ONE_WIRE_BUS);        
 DallasTemperature sensors(&oneWire);
 DeviceAddress sensor1;
 
