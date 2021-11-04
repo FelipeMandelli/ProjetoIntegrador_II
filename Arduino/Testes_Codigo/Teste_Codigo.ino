@@ -29,7 +29,7 @@ const int pino_Turb = A1;
 //Declarando Objetos 
 
 //Objetos Sensor Temperatura
-neWire oneWire(ONE_WIRE_BUS);        
+OneWire oneWire(ONE_WIRE_BUS);        
 DallasTemperature sensors(&oneWire);
 DeviceAddress sensor1;
 
@@ -76,7 +76,7 @@ int gpsBaud = 9600;
   }
 
   //Obter o Ph por Referencia (Ponteiros)
-  void LerValorPH(int *pPH, bool *pStaPh){
+  void LerValorPH(float *pPH, bool *pStaPh){
     //Declara Variaveis
     float vet_precisao[10],media_prec_ph = 0, aux, conver_aux;
     float ph_valor, calibragem = 21.34 - 0.3;
@@ -114,8 +114,8 @@ int gpsBaud = 9600;
     //Devolve Valores de Saida
     *pPH = ph_valor;
     //Impede Resultado Absurdo
-    if (ph_valor >= 0 ) and (ph_valor <= 14){
-      *pStaPh = true
+    if (ph_valor >= 0 && ph_valor <= 14){
+      *pStaPh = true;
     }
   }
   
@@ -186,10 +186,10 @@ int gpsBaud = 9600;
     }
 
     //Devolve os Valores de Saida
-    *pTurb = media_prec_turb/6
+    *pTurb = media_prec_turb/6;
     //Impede Resultado Absurdo
-    if ((media_prec_turb/6) >= 0 ) and ((media_prec_turb/6) <= 1024){
-      *pStaPh = true
+    if ((media_prec_turb/6) >= 0 && (media_prec_turb/6) <= 1024){
+      *pStaTurb = true;
     }
   }
   
@@ -212,7 +212,7 @@ int gpsBaud = 9600;
       *pA = gps.date.year();
       *pM = gps.date.month();
       *pD = gps.date.day();
-      *pStaDataGPS = true
+      *pStaDataGPS = true;
     }
     else {
       *pStaDataGPS = false;
@@ -267,7 +267,8 @@ void loop() {
   int valorSensorTurbidez;
   
   //Infos do GPS
-  long Latitude, Longitude, Altitude;
+  long Latitude, Longitude;
+  int Altitude;
   int Ano, Mes, Dia;
   int Hora, Minuto, Segundo;
   bool statusPosGPS = false;
@@ -329,7 +330,7 @@ void loop() {
     }
 
     else {
-      Serial,println("Valor nao Obtido");
+      Serial.println("Valor nao Obtido");
     }
 
     Serial.println();
@@ -346,37 +347,37 @@ void loop() {
 
     //Escreve, se houver, o Valor no monitor serial
     if (statusPosGPS == true){
-      serial.print("Latitude: ");
-      serial.println(Latitude);
-      serial.print("Longitude: ");
-      serial.println(Longitude);
-      serial.print("Altitude: ");
-      serial.println(Altitude);
+      Serial.print("Latitude: ");
+      Serial.println(Latitude);
+      Serial.print("Longitude: ");
+      Serial.println(Longitude);
+      Serial.print("Altitude: ");
+      Serial.println(Altitude);
       statusGPS = true;
     }
 
     if (statusHoraGPS == true){
-      serial.print("Hora: ");
-      serial.print(Hora);
-      serial.print(":");
-      serial.print(Minuto);
-      serial.print(":");
-      serial.println(Segundo);
+      Serial.print("Hora: ");
+      Serial.print(Hora);
+      Serial.print(":");
+      Serial.print(Minuto);
+      Serial.print(":");
+      Serial.println(Segundo);
       statusGPS = true;
     }
 
     if (statusDataGPS == true){
-      serial.print("Data: ");
-      serial.print(Dia);
-      serial.print("/");
-      serial.print(Mes);
-      serial.print("/");
-      serial.println(Ano);
+      Serial.print("Data: ");
+      Serial.print(Dia);
+      Serial.print("/");
+      Serial.print(Mes);
+      Serial.print("/");
+      Serial.println(Ano);
       statusGPS = true;
     }
 
     if (statusGPS != true){
-      serial.println("GPS sem valores!");
+      Serial.println("Valor nao Obtido");
     }
   }
 
