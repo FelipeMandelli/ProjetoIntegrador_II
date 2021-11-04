@@ -1,7 +1,17 @@
+//----------------------------------------------------------//
+//----------------------------------------------------------//
+
+
+
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+//Define Pinagem
+//Define o Pino 4 como Sensor de Temperatura
 #define    ONE_WIRE_BUS     4 
+
+//Define o Pino A0 como Sensor de pH
+int pino_PH = A0;
 
 OneWire oneWire(ONE_WIRE_BUS);        
 DallasTemperature sensors(&oneWire);
@@ -19,7 +29,8 @@ DeviceAddress sensor1;
     }
   }
 
-  //Funcao para Inicializar, Obter e Mostrar o Endereco Temperatura
+  //Funcao para Inicializar, Obter e Mostrar o 
+  //  Endereco da Temperatura
   void inicializa_sensor_temperatura() {                                                       
     //Localiza e mostra endereco do sensor de Temperatura
     Serial.println("Localizando sensores DS18B20...");
@@ -43,13 +54,53 @@ DeviceAddress sensor1;
   
   }
 
-  //Obter o Ph
-  int LerValorPH(int ValorPH, boolean statusPh){
-  
+  //Obter o Ph por Referencia (Ponteiros)
+  int LerValorPH(int *pPH, boolean *pStaPh){
+    //Declara Variaveis
+    float vet_precisao[10],media_prec_ph = 0, aux, conver_aux;
+    float ph_valor, calibragem = 21.34 - 0.3;
+
+    //Obtem 10 valores para media, aumentando precisao
+    for(int i = 0; i < 10; i++){
+      vet_precisao[i] = analogRead(pino_PH);
+      delay(50);
+    }
+
+    //Organiza o vetor em ordem crescente
+    for (int i = 0; i < 9; i++){
+       
+      for (int j = i+1; j < 10; j++){
+       
+        if (vet_precisao[i] > vet_precisao[j]){
+          aux = vet_precisao[i];
+          vet_precisao[i] = vet_precisao[j];
+          vet_precisao[j] = aux;
+        }
+      }
+    }
+
+    //Exclui 2 maiores e 2 menores valores
+    for (int i = 2; i < 8; i++){
+      media_prec_ph += vet_precisao[i];
+    }
+
+    //Converte para Leitura de Voltagem o valor medio
+    conver_aux = media_prec_ph / 6 * (5.0/1024.0);
+
+    //Converte para valor final do pH
+    ph_valor = -5.70 * conver_aux + calibragem;
+
+    //Devolve Valores de Saida
+    *pPH = ph_valor;
+    //Impede Resultado Absurdo
+    if (ph_valor >= 0 && ph_valor <= 14){
+      *pStaPh = true
+    }
+    
   }
   
-  // Obter a Temperatura
-  int LerValorTemperatura(float *pTemp, boolean *pStemp){
+  // Obter a Temperatura por Referencia (Ponteiros)
+  int LerValorTemperatura(float *pTemp, boolean *pStaTemp){
      
      //Declaracao e Inicializa sensor
      float vet_precisao[10], aux, media_prec_Temp = 0;
@@ -82,7 +133,7 @@ DeviceAddress sensor1;
 
     //Devolve os Valores de Saida
      *pTemp = media_prec_Temp/6;
-     *pStemp = true;
+     *pStaTemp = true;
          
   }
   
@@ -98,11 +149,14 @@ DeviceAddress sensor1;
 
 
 void setup() {
-  
+  //Inicia Monitor Serial
   Serial.begin(9600);
 
+  //Inicializa o sensor de Temperatura
   sensors.begin();
 
+  //Chamada funcao de inicializacao da Temperatura e do 
+  //  Endereco do sensor
   inicializa_sensor_temperatura();
   
 }
@@ -125,6 +179,7 @@ void loop() {
   int valorSensorTurbidez;
   int informacoesGps;
    
+
   //Obter os Valores da Temperatura 
   if(statusTemperatura != true){
     
@@ -148,18 +203,26 @@ void loop() {
   }
 
   
-  delay(1000);
+  //Obter os Valores do pH
+  if(statusPh != true){
+    
+    //Chama a funcao LerValorPH                    
+    LerValorPH(&valorSensorPh,&statusPh);
+    
+    //Escreve, se houver, o Valor no monitor serial
+    Serial.print("Valor do sensor de pH: ");
+    if (statusPh == true){
+      Serial.println(valorSensorPh);
+    }
+
+    else {
+      Serial.println("Valor nao Obtido");
+    }
+
+    Serial.println();
+    Serial.println();
+ }
   
-//  if(statusPh != true){
-//    //Chama a funcao LerValorPH                    
-//    LerValorPH(valorSensorPh,statusPh);
-//    Serial.println("Valor do sensor de pH: ");
-//    if (statusPh == true){
-//      Serial.println(valorSensorPh);
-//    }
-//    else 
-//    Serial.println("Valor nao Obtido");
-//  }
 //
 //  if(statusTurbidez != true){
 //    //Chama a funcao LerValorGPS                   
@@ -170,5 +233,7 @@ void loop() {
 //    //Chama a funcao LerValorGPS                   
 //    LerValorTurbidez(valorSensorTurbidez, informacoesGps);
 //  }
+
+  delay(1000);
 
 }
