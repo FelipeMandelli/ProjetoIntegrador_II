@@ -16,8 +16,8 @@ A parte fisica do projeto consiste de uma placa Arduino Uno, como microcontrolad
 
 
 * Em conjunto, durante um encontro do grupo, foi testado o funcionamento individual de todos os Sensores com todos eles conectados ao mesmo tempo no arduino, os codigos utilizados foram os mesmos dos testes individuais previos. Na pasta Testes_Codigo serao adicionadas imagens para a vizualizacao da montagem feita nestes testes.
-- No arquivo "Montagem Fisica do Teste - Anotacao" se encontra uma listagem das conexoes realizadas nestes testes em pdf
-- No arquivo "Montagem Fisica do Teste - Esquematico" se encontra um esquema em pdf das conexoes realizadas nos testes, feito no simulador Tinkercad
+  - No arquivo "Montagem Fisica do Teste - Anotacao" se encontra uma listagem das conexoes realizadas nestes testes em pdf
+  - No arquivo "Montagem Fisica do Teste - Esquematico" se encontra um esquema em pdf das conexoes realizadas nos testes, feito no simulador Tinkercad
 
 * Em seguida, foi iniciado o processo de unificar todos os codigos de sensores, para que todos os valores sejam obtidos pelo mesmo codigo e mostrados no monitor serial.
-- Na pasta Testes_Codigo, o arquivo "Teste_Codigo.ino" contem o desenvolvimento deste codigo unificado de todos os sensores, seguindo a mesma montagem do processo anterior
+  - Na pasta Testes_Codigo, o arquivo "Teste_Codigo.ino" contem o desenvolvimento deste codigo unificado de todos os sensores, seguindo a mesma montagem do processo anterior
