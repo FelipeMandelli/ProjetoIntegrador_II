@@ -13,6 +13,7 @@ A parte fisica do projeto consiste de uma placa Arduino Uno, como microcontrolad
 
 
 * Aliado tambem ao Microcontrolador, o projeto da boia foi desenvolvido inicialmente pelo Grupo, com auxilio do Software de modelagem SolidWorks, esta modelagem inicial se encontra na pasta Boia, arquivo Esboco Inicial. O intuito deste esboco era criar uma imagem do projeto, bem como um norte para definir a modelagem final da boia juntamente com os tecnicos do Senac para impressao 3D.
+  - Ao longo do desenvolvimento e de conversas com os tecnico, foi decidido utilizar uma boia do tipo espaguete para a boia e a base dos componentes foi desenvolvida a partir do desenho que esta no arquivo "Esboco Base Componentes" dentro da pasta Boia e feito em impressora 3D.
 
 
 * Em conjunto, durante um encontro do grupo, foi testado o funcionamento individual de todos os Sensores com todos eles conectados ao mesmo tempo no arduino, os codigos utilizados foram os mesmos dos testes individuais previos. Na pasta Testes_Codigo serao adicionadas imagens para a vizualizacao da montagem feita nestes testes.
