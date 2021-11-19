@@ -1,3 +1,12 @@
+<?php
+	include("includes/bd_connect.php");
+
+	$consulta = "SELECT * FROM tab_info";
+
+	$con = $mysqli->query($consulta) or die($mysqli->error);		
+
+?>
+
 <!doctype html>
 
 <html lang="pt">
@@ -72,6 +81,13 @@
         <div class="ratio ratio-16x9 center img-thumbnail" id="map"></div>
 
         <script type="text/javascript">
+		var lat
+		var lon
+		alert(lon)
+		lat = 23
+		alert(lat)
+		lon = 24
+		alert(lon)
             function getLocation(){
                 if(!navigator.geolocation)
                     return null;
@@ -82,29 +98,20 @@
             }
 
 
-            function initMap() {
-                
-                // The location of Uluru
-                const uluru = [
-                    { lat: -31.56391, lng: 147.154312 },
-                    { lat: -23.641625627748653, lng: -46.812149417946216}
-                ];
-                // The map, centered at Uluru
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 4,
-                    center: { lat: -23.62323248956446, lng: -46.80266945646938 },
-                });
-
-
-                // The marker, positioned at Uluru
-                const markers = uluru.map((location, i) => {
-                        return new google.maps.Marker({
-                        position: location,
-                        map: map,
-                    });
-                });
-
-            }
+			function initMap() {
+				// The location of Uluru
+				const uluru = { lat: lat, lng: lon };
+				// The map, centered at Uluru
+				const map = new google.maps.Map(document.getElementById("map"), {
+					zoom: 4,
+					center: uluru,
+				});
+				// The marker, positioned at Uluru
+				const marker = new google.maps.Marker({
+					position: uluru,
+					map: map,
+				});
+			}
         </script>
         
 	
