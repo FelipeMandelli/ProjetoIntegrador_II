@@ -1,3 +1,11 @@
+<?php
+	include("includes/bd_connect.php");
+
+	$consulta = "SELECT * FROM tab_info";
+
+	$con = $mysqli->query($consulta) or die($mysqli->error);		
+
+?>
 <!doctype html>
 
 <html lang="pt">
@@ -57,6 +65,42 @@
 				</div>
 			</div>
 		</nav>
+
+		<br>
+		<br>
+		<!--Tabela-->
+		<table class="table table-striped table-hover">
+			<thead>
+				<th colspan="7" scope="col"></th>
+			</thead>
+			<thead>
+      			<th colspan="7" scope="col" class="text-center">DADOS</th>
+			</thead>
+			<thead>
+				<tr>
+				<th scope="col">#</th>
+				<th scope="col">Data</th>
+				<th scope="col">Latitude</th>
+				<th scope="col">Longitude</th>
+				<th scope="col">pH</th>
+				<th scope="col">Temperatura</th>
+				<th scope="col">Turbidez</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php while($dado = $con->fetch_array()){ ?>
+					<tr>
+					<th scope="row"><?php echo $dado["id_inf"] ?></th>
+					<td><?php echo $dado["inf_gps_date"] ?></td>
+					<td><?php echo $dado["inf_gps_lat"] ?></td>
+					<td><?php echo $dado["inf_gps_long"] ?></td>
+					<td><?php echo $dado["inf_ph"] ?></td>
+					<td><?php echo $dado["inf_temp"] ?> °C </td>
+					<td><?php echo $dado["inf_tub"] ?></td>
+					</tr>
+				<?php } ?>
+			</tbody>
+			</table>
 
 	
 	</body>
